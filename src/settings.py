@@ -10,7 +10,8 @@ window_caption = 'Tanks'
 window_icon = pygame.image.load('images/icon.png')
 window_background_color = (0, 0, 0)
 
-fps = 60 # FPS
+text_color = (255, 255, 255)  # Text color
+fps = 60  # FPS
 
 # Tanks rotation
 top_rotation = 0

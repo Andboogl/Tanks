@@ -12,6 +12,7 @@ class Bullet:
         self.__width = 50
         self.__speed = 3
         self.__rotation = tank.rotation
+        self.__image = ...
 
         if tank.rotation == 0:
             self.__x = tank.x + tank.image.get_width() / 2
@@ -49,6 +50,11 @@ class Bullet:
         """Get bullet width"""
         return self.__width
 
+    @property
+    def image(self) -> pygame.rect.Rect:
+        """Get bullet image"""
+        return self.__image
+
     def update(self) -> None:
         """Update bullet coordinates"""
         if self.__rotation == 0:
@@ -66,21 +72,21 @@ class Bullet:
     def draw(self) -> None:
         """Draw bullet"""
         if self.__rotation == 0:
-            pygame.draw.line(
+            self.__image = pygame.draw.line(
                 self.__screen, self.__color, (self.__x, self.__y),
                 (self.__x, self.__y + self.__width), 2)
 
         elif self.__rotation == 90:
-            pygame.draw.line(
+            self.__image = pygame.draw.line(
                 self.__screen, self.__color, (self.__x, self.__y),
                 (self.__x - self.__width, self.__y), 2)
 
         elif self.__rotation == 180:
-            pygame.draw.line(
+            self.__image = pygame.draw.line(
                 self.__screen, self.__color, (self.__x, self.__y),
                 (self.__x, self.__y - self.__width), 2)
 
         elif self.__rotation == 270:
-            pygame.draw.line(
+            self.__image = pygame.draw.line(
                 self.__screen, self.__color, (self.__x, self.__y),
                 (self.__x + self.__width, self.__y), 2)

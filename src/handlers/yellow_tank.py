@@ -13,6 +13,11 @@ class YellowTankHandler:
         self.__yellow_tank = yellow_tank
         self.__yellow_tank_bullets = []
 
+    @property
+    def bullets(self) -> list:
+        """Get green tank bullets"""
+        return self.__yellow_tank_bullets
+
     def movement(self) -> None:
         """Yellow tank movement"""
         keys = pygame.key.get_pressed()
