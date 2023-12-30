@@ -76,6 +76,7 @@ class Game:
                                 topleft=(self.__yellow_tank.x, self.__yellow_tank.y))):
                         self.__play_mode = 'Won'
                         won_menu = WonMenu(self.__screen, 'green')
+                        pygame.mixer.Sound('sounds/won.mp3').play()
 
                 # Yellow tank bullet kill
                 for bullet in self.__yellow_tank_handler.bullets:
@@ -84,6 +85,7 @@ class Game:
                                 topleft=(self.__green_tank.x, self.__green_tank.y))):
                         self.__play_mode = 'Won'
                         won_menu = WonMenu(self.__screen, 'yellow')
+                        pygame.mixer.Sound('sounds/won.mp3').play()
 
                 # Bullet destroys block
                 try:
@@ -92,12 +94,14 @@ class Game:
                             if bullet.image.colliderect(block.image_rect):
                                 self.__blocks.remove(block)
                                 self.__yellow_tank_handler.bullets.remove(bullet)
+                                pygame.mixer.Sound('sounds/destroying_block.mp3').play()
 
                     for bullet in self.__green_tank_handler.bullets:
                         for block in self.__blocks:
                             if bullet.image.colliderect(block.image_rect):
                                 self.__blocks.remove(block)
                                 self.__green_tank_handler.bullets.remove(bullet)
+                                pygame.mixer.Sound('sounds/destroying_block.mp3').play()
 
                 # If the bullet hits two blocks at once
                 except (Exception, ValueError):
