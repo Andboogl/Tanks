@@ -45,7 +45,7 @@ class Game:
                 self.__yellow_tank_handler.draw()
                 self.__yellow_tank_handler.movement(self.__blocks)
 
-                self.__green_tank_handler.movement()
+                self.__green_tank_handler.movement(self.__blocks)
                 self.__green_tank_handler.draw()
 
                 # Drawing blocks
