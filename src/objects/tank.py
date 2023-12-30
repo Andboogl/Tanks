@@ -26,7 +26,13 @@ class Tank:
             pygame.image.load(self.__image_path), self.__size)
 
     @property
-    def color(self):
+    def image_rect(self) -> pygame.rect.Rect:
+        """Get tank image rect"""
+        return self.__image.get_rect(topleft=(self.__x, self.__y))
+
+    @property
+    def color(self) -> str:
+        """Get tank color"""
         return self.__color
 
     @property
@@ -48,11 +54,6 @@ class Tank:
     def rotation(self) -> int:
         """Get tank rotation"""
         return self.__rotation
-
-    @property
-    def color(self) -> str:
-        """Get tank color"""
-        return self.__color
 
     def rotate_tank(self, rotation: int) -> None:
         """Rotate tank"""

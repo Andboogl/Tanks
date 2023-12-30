@@ -18,21 +18,57 @@ class YellowTankHandler:
         """Get green tank bullets"""
         return self.__yellow_tank_bullets
 
-    def movement(self) -> None:
+    def movement(self, blocks_list) -> None:
         """Yellow tank movement"""
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_w]:
-            self.__yellow_tank.move_tank('top')
+            can_move = True
+
+            for block in blocks_list:
+                if self.__yellow_tank.image_rect.colliderect(block.image_rect):
+                    if not self.__yellow_tank.y - 2 < block.y:
+                        self.__yellow_tank.move_tank('down')
+                        can_move = False
+
+            if can_move:
+                self.__yellow_tank.move_tank('top')
 
         elif keys[pygame.K_a]:
-            self.__yellow_tank.move_tank('left')
+            can_move = True
+
+            for block in blocks_list:
+                if self.__yellow_tank.image_rect.colliderect(block.image_rect):
+                    if not self.__yellow_tank.x - 2 < block.x:
+                        self.__yellow_tank.move_tank('right')
+                        can_move = False
+
+            if can_move:
+                self.__yellow_tank.move_tank('left')
 
         elif keys[pygame.K_s]:
-            self.__yellow_tank.move_tank('down')
+            can_move = True
+
+            for block in blocks_list:
+                if self.__yellow_tank.image_rect.colliderect(block.image_rect):
+                    if not self.__yellow_tank.y + 2 > block.y:
+                        self.__yellow_tank.move_tank('top')
+                        can_move = False
+
+            if can_move:
+                self.__yellow_tank.move_tank('down')
 
         elif keys[pygame.K_d]:
-            self.__yellow_tank.move_tank('right')
+            can_move = True
+
+            for block in blocks_list:
+                if self.__yellow_tank.image_rect.colliderect(block.image_rect):
+                    if not self.__yellow_tank.x + 2 > block.x:
+                        self.__yellow_tank.move_tank('left')
+                        can_move = False
+
+            if can_move:
+                self.__yellow_tank.move_tank('right')
 
     def rotation_and_shooting(self, event) -> None:
         """Yellow tank keyboard handling"""

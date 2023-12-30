@@ -18,8 +18,16 @@ class Game:
         pygame.display.set_icon(settings.window_icon)
         self.__clock = pygame.time.Clock()
 
+        # Tanks
         self.__yellow_tank = objects.Tank(self.__screen, 100, 100, 'yellow')
         self.__green_tank = objects.Tank(self.__screen, 500, 500, 'green')
+
+        # Blocks
+        self.__blocks = [
+            objects.Block(self.__screen, 10, 10),
+            objects.Block(self.__screen, 300, 300),
+            objects.Block(self.__screen, 200, 200)
+        ]
 
         self.__play_mode = 'Playing'
         self.__who_won = None
@@ -35,10 +43,14 @@ class Game:
                 self.__screen.fill(settings.window_background_color)
 
                 self.__yellow_tank_handler.draw()
-                self.__yellow_tank_handler.movement()
+                self.__yellow_tank_handler.movement(self.__blocks)
 
                 self.__green_tank_handler.movement()
                 self.__green_tank_handler.draw()
+
+                # Drawing blocks
+                for block in self.__blocks:
+                    block.draw()
 
                 # Green tank bullet kill
                 for bullet in self.__green_tank_handler.bullets:
