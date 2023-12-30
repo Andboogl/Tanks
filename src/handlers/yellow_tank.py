@@ -85,8 +85,7 @@ class YellowTankHandler:
             self.__yellow_tank.rotate_tank(settings.right_rotation)
 
         elif event.key == pygame.K_SPACE:
-            if len(self.yellow_tank_bullets) <= 0:
-                self.yellow_tank_bullets.append(objects.Bullet(self.__screen, self.__yellow_tank))
+            self.yellow_tank_bullets.append(objects.Bullet(self.__screen, self.__yellow_tank))
 
     def draw(self) -> None:
         """Draw yellow tank and its bullets"""

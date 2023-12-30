@@ -10,7 +10,7 @@ class Bullet:
         self.__screen = screen
         self.__color = (255, 255, 0) if tank.color == 'yellow' else (0, 255, 0)
         self.__width = 50
-        self.__speed = 3
+        self.__speed = 4
         self.__rotation = tank.rotation
         self.__image = ...
 

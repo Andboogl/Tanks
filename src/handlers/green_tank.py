@@ -85,8 +85,7 @@ class GreenTankHandler:
             self.__green_tank.rotate_tank(settings.right_rotation)
 
         elif event.key == pygame.K_RETURN:
-            if len(self.green_tank_bullets) <= 0:
-                self.green_tank_bullets.append(objects.Bullet(self.__screen, self.__green_tank))
+            self.green_tank_bullets.append(objects.Bullet(self.__screen, self.__green_tank))
 
     def draw(self) -> None:
         """Draw green tank and its bullets"""
