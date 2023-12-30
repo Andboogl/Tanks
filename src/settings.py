@@ -11,7 +11,7 @@ window_icon = pygame.image.load('images/icon.png')
 window_background_color = (0, 0, 0)
 
 text_color = (255, 255, 255)  # Text color
-fps = 60  # FPS
+fps = 120  # FPS
 
 # Tanks rotation
 top_rotation = 0

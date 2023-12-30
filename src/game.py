@@ -19,14 +19,31 @@ class Game:
         self.__clock = pygame.time.Clock()
 
         # Tanks
-        self.__yellow_tank = objects.Tank(self.__screen, 100, 100, 'yellow')
-        self.__green_tank = objects.Tank(self.__screen, 500, 500, 'green')
+        self.__yellow_tank = objects.Tank(self.__screen, 1125, 10, 'yellow')
+        self.__green_tank = objects.Tank(self.__screen, 1125, 725, 'green')
 
         # Blocks
         self.__blocks = [
-            objects.Block(self.__screen, 10, 10),
+            objects.Block(self.__screen, 79, 99),
+            objects.Block(self.__screen, 260, 100),
+            objects.Block(self.__screen, 99, 297),
+            objects.Block(self.__screen, 397, 167),
+            objects.Block(self.__screen, 418, 386),
+            objects.Block(self.__screen, 99, 555),
+            objects.Block(self.__screen, 300, 584),
             objects.Block(self.__screen, 300, 300),
-            objects.Block(self.__screen, 200, 200)
+            objects.Block(self.__screen, 200, 200),
+            objects.Block(self.__screen, 560, 504),
+            objects.Block(self.__screen, 661, 337),
+            objects.Block(self.__screen, 833, 466),
+            objects.Block(self.__screen, 816, 233),
+            objects.Block(self.__screen, 816, 233),
+            objects.Block(self.__screen, 833, 466),
+            objects.Block(self.__screen, 1090, 337),
+            objects.Block(self.__screen, 1090, 337),
+            objects.Block(self.__screen, 1090, 337),
+            objects.Block(self.__screen, 1090, 337),
+            objects.Block(self.__screen, 1090, 337),
         ]
 
         self.__play_mode = 'Playing'
@@ -68,7 +85,23 @@ class Game:
                         self.__play_mode = 'Won'
                         won_menu = WonMenu(self.__screen, 'yellow')
 
-                self.__clock.tick(settings.fps)
+                # Bullet destroys block
+                try:
+                    for bullet in self.__yellow_tank_handler.bullets:
+                        for block in self.__blocks:
+                            if bullet.image.colliderect(block.image_rect):
+                                self.__blocks.remove(block)
+                                self.__yellow_tank_handler.bullets.remove(bullet)
+
+                    for bullet in self.__green_tank_handler.bullets:
+                        for block in self.__blocks:
+                            if bullet.image.colliderect(block.image_rect):
+                                self.__blocks.remove(block)
+                                self.__green_tank_handler.bullets.remove(bullet)
+
+                # If the bullet hits two blocks at once
+                except (Exception, ValueError):
+                    pass
 
             elif self.__play_mode == 'Won':
                 self.__play_mode = won_menu.draw()
@@ -85,4 +118,5 @@ class Game:
                         self.__yellow_tank_handler.rotation_and_shooting(event)
                         self.__green_tank_handler.rotation_and_shooting(event)
 
+            self.__clock.tick(settings.fps)
             pygame.display.update()

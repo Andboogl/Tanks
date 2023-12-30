@@ -11,12 +11,12 @@ class YellowTankHandler:
     def __init__(self, screen, yellow_tank) -> None:
         self.__screen = screen
         self.__yellow_tank = yellow_tank
-        self.__yellow_tank_bullets = []
+        self.yellow_tank_bullets = []
 
     @property
     def bullets(self) -> list:
         """Get green tank bullets"""
-        return self.__yellow_tank_bullets
+        return self.yellow_tank_bullets
 
     def movement(self, blocks_list) -> None:
         """Yellow tank movement"""
@@ -85,30 +85,30 @@ class YellowTankHandler:
             self.__yellow_tank.rotate_tank(settings.right_rotation)
 
         elif event.key == pygame.K_SPACE:
-            if len(self.__yellow_tank_bullets) <= 0:
-                self.__yellow_tank_bullets.append(objects.Bullet(self.__screen, self.__yellow_tank))
+            if len(self.yellow_tank_bullets) <= 0:
+                self.yellow_tank_bullets.append(objects.Bullet(self.__screen, self.__yellow_tank))
 
     def draw(self) -> None:
         """Draw yellow tank and its bullets"""
         self.__yellow_tank.draw()
 
-        for bullet in self.__yellow_tank_bullets:
+        for bullet in self.yellow_tank_bullets:
             bullet.draw()
             bullet.update()
 
             # Bullet deletion
             if bullet.rotation == 0:
                 if bullet.y + bullet.width < 0:
-                    self.__yellow_tank_bullets.remove(bullet)
+                    self.yellow_tank_bullets.remove(bullet)
 
             elif bullet.rotation == 90:
                 if bullet.x < 0:
-                    self.__yellow_tank_bullets.remove(bullet)
+                    self.yellow_tank_bullets.remove(bullet)
 
             elif bullet.rotation == 180:
                 if bullet.y - bullet.width > settings.window_size[1]:
-                    self.__yellow_tank_bullets.remove(bullet)
+                    self.yellow_tank_bullets.remove(bullet)
 
             elif bullet.rotation == 270:
                 if bullet.x - bullet.width > settings.window_size[0]:
-                    self.__yellow_tank_bullets.remove(bullet)
+                    self.yellow_tank_bullets.remove(bullet)
